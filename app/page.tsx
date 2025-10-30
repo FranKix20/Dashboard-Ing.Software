@@ -4,6 +4,7 @@ import { useState } from "react"
 import { FileUpload } from "@/components/file-upload"
 import { DataCleaning } from "@/components/data-cleaning"
 import { Dashboard } from "@/components/dashboard"
+import { DataTable } from "@/components/data-table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { SalesData } from "@/lib/types"
 
@@ -47,13 +48,16 @@ export default function Page() {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-4 mb-8">
             <TabsTrigger value="upload">1. Cargar Datos</TabsTrigger>
             <TabsTrigger value="cleaning" disabled={rawData.length === 0}>
               2. Limpieza de Datos
             </TabsTrigger>
             <TabsTrigger value="dashboard" disabled={cleanedData.length === 0}>
               3. Dashboard
+            </TabsTrigger>
+            <TabsTrigger value="table" disabled={cleanedData.length === 0}>
+              4. Tabla de Datos
             </TabsTrigger>
           </TabsList>
 
@@ -67,6 +71,10 @@ export default function Page() {
 
           <TabsContent value="dashboard">
             <Dashboard data={cleanedData} />
+          </TabsContent>
+
+          <TabsContent value="table">
+            <DataTable data={cleanedData} />
           </TabsContent>
         </Tabs>
       </main>
