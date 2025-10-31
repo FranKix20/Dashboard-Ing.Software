@@ -7,6 +7,7 @@ import { SalesChart } from "@/components/sales-chart"
 import { TopProductsChart } from "@/components/top-products-chart"
 import { PaymentMethodsChart } from "@/components/payment-methods-chart"
 import { CountrySalesChart } from "@/components/country-sales-chart"
+import { TrendingUp, ShoppingCart, DollarSign, Activity } from "lucide-react"
 import type { SalesData } from "@/lib/types"
 import {
   calculateTotalSales,
@@ -43,13 +44,16 @@ export function Dashboard({ data }: DashboardProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between p-6 rounded-xl bg-gradient-to-r from-accent/10 via-accent/5 to-transparent border-2 border-accent/20">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Dashboard de Ventas</h2>
-          <p className="text-sm text-muted-foreground">Análisis completo del rendimiento de TechTrends</p>
+          <h2 className="text-3xl font-bold text-foreground flex items-center gap-3">
+            <Activity className="h-8 w-8 text-accent" />
+            Dashboard de Ventas
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">Análisis completo del rendimiento de TechTrends</p>
         </div>
         <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-          <SelectTrigger className="w-48">
+          <SelectTrigger className="w-48 border-2 hover:border-accent/50 transition-colors">
             <SelectValue placeholder="Filtrar por mes" />
           </SelectTrigger>
           <SelectContent>
@@ -71,33 +75,63 @@ export function Dashboard({ data }: DashboardProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="border-2 hover:border-accent/30 transition-all hover:shadow-lg hover:scale-[1.02]">
           <CardHeader className="pb-3">
-            <CardDescription>Ventas Totales</CardDescription>
-            <CardTitle className="text-3xl">${totalSales.toLocaleString("es-MX")}</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardDescription>Ventas Totales</CardDescription>
+              <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+                <DollarSign className="h-5 w-5 text-accent" />
+              </div>
+            </div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
+              ${totalSales.toLocaleString("es-MX")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Ingresos totales del período seleccionado</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <TrendingUp className="h-3 w-3" />
+              Ingresos totales del período seleccionado
+            </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-2 hover:border-chart-2/30 transition-all hover:shadow-lg hover:scale-[1.02]">
           <CardHeader className="pb-3">
-            <CardDescription>Transacciones</CardDescription>
-            <CardTitle className="text-3xl">{totalTransactions.toLocaleString("es-MX")}</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardDescription>Transacciones</CardDescription>
+              <div className="h-10 w-10 rounded-full bg-chart-2/10 flex items-center justify-center">
+                <ShoppingCart className="h-5 w-5 text-chart-2" />
+              </div>
+            </div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-chart-2 to-chart-2/70 bg-clip-text text-transparent">
+              {totalTransactions.toLocaleString("es-MX")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Número total de transacciones realizadas</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <Activity className="h-3 w-3" />
+              Número total de transacciones realizadas
+            </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-2 hover:border-chart-3/30 transition-all hover:shadow-lg hover:scale-[1.02]">
           <CardHeader className="pb-3">
-            <CardDescription>Ticket Promedio</CardDescription>
-            <CardTitle className="text-3xl">${averageTicket.toLocaleString("es-MX")}</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardDescription>Ticket Promedio</CardDescription>
+              <div className="h-10 w-10 rounded-full bg-chart-3/10 flex items-center justify-center">
+                <TrendingUp className="h-5 w-5 text-chart-3" />
+              </div>
+            </div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-chart-3 to-chart-3/70 bg-clip-text text-transparent">
+              ${averageTicket.toLocaleString("es-MX")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Valor promedio por transacción</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <DollarSign className="h-3 w-3" />
+              Valor promedio por transacción
+            </p>
           </CardContent>
         </Card>
       </div>
